@@ -38,5 +38,20 @@ function getUserData(id) {
       .then((vaultDb) => {
         vaultData = vaultDb;
       });
+
+    try {
+      const resultObj = {
+        id: id,
+        name: vaultData.name,
+        username: specificDb.username,
+        email: vaultData.email,
+        address: vaultData.address,
+        phone: vaultData.phone,
+        website: specificDb.website,
+        company: specificDb.company,
+      };
+    } catch (err) {
+      console.log(err);
+    }
   });
 }
