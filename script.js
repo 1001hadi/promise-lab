@@ -85,5 +85,12 @@ function getUserData(id) {
   });
 }
 
-// lest test the result :)
+//  testing the result output
 
+getUserData(5)
+  .then((userInfo) => {
+    console.log("User Information:", userInfo);
+  })
+  .catch((err) => {
+    console.log("Error Happen:", err);
+  });
