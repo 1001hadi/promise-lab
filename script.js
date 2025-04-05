@@ -78,6 +78,12 @@ function getUserData(id) {
         } catch (err) {
           rej(`result object creation error ${err.message}`);
         }
+      })
+      .catch((err) => {
+        rej(err);
       });
   });
 }
+
+// lest test the result :)
+
