@@ -16,4 +16,11 @@ function getUserData(id) {
   // declare obj var to put the data to gather
   // check the data, if the type of data is not matched assign them to null
   // if data base has error show error in catch
+
+  return new Promise((res, rej) => {
+    if (typeof id !== "number" || id < 1 || id > 10) {
+      rej(`Please enter valid number between 1 to 10.`);
+      return;
+    }
+  });
 }
