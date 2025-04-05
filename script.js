@@ -37,21 +37,47 @@ function getUserData(id) {
       })
       .then((vaultDb) => {
         vaultData = vaultDb;
-      });
 
-    try {
-      const resultObj = {
-        id: id,
-        name: vaultData.name,
-        username: specificDb.username,
-        email: vaultData.email,
-        address: vaultData.address,
-        phone: vaultData.phone,
-        website: specificDb.website,
-        company: specificDb.company,
-      };
-    } catch (err) {
-      console.log(err);
-    }
+        try {
+          const resultObj = {
+            id: id,
+            name: vaultData.name,
+            username: specificDb.username,
+            email: vaultData.email,
+            address: vaultData.address,
+            phone: vaultData.phone,
+            website: specificDb.website,
+            company: specificDb.company,
+          };
+
+          if (
+            typeof resultObj.address !== "object" ||
+            resultObj.address === null
+          ) {
+            rej(`The address from vault database is incorrect`);
+            return;
+          }
+
+          if (
+            typeof resultObj.address.geo !== "object" ||
+            resultObj.address.geo === null
+          ) {
+            rej(`The geo data from vault database is incorrect`);
+            return;
+          }
+
+          if (
+            typeof resultObj.company !== "object" ||
+            resultObj.company === null
+          ) {
+            rej(`The company data from specific database is incorrect`);
+            return;
+          }
+
+          res(resultObj);
+        } catch (err) {
+          rej(`result object creation error ${err.message}`);
+        }
+      });
   });
 }
