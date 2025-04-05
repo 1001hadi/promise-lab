@@ -22,5 +22,21 @@ function getUserData(id) {
       rej(`Please enter valid number between 1 to 10.`);
       return;
     }
+    let dbName;
+    let specificDb;
+    let vaultData;
+
+    central(id)
+      .then((dataName) => {
+        dbName = dataName;
+        return dbs[dbName](id);
+      })
+      .then((specificData) => {
+        specificDb = specificData;
+        return vault(id);
+      })
+      .then((vaultDb) => {
+        vaultData = vaultDb;
+      });
   });
 }
